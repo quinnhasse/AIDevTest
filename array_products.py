@@ -2,18 +2,20 @@ from typing import List
 
 def calculate_products(numbers: List[int]) -> List[int]:
     """
-    Calculate a list where each element at position i is the product of all numbers except the one at position i.
-    
+    Calculate a list where each element at position i is the product of all numbers
+    except the one at position i.
+
     Args:
         numbers: List of integers
-        
+
     Returns:
-        List of integers where each element is the product of all numbers except the one at the same index
-        
+        List of integers where each element is the product of all numbers except
+        the one at the corresponding position
+
     Raises:
         TypeError: If input is None or not a list
         ValueError: If input contains non-integer values
-        
+
     Examples:
         >>> calculate_products([1, 2, 3, 4])
         [24, 12, 8, 6]
@@ -31,29 +33,29 @@ def calculate_products(numbers: List[int]) -> List[int]:
         raise TypeError("Input must be a list")
     if any(not isinstance(x, int) for x in numbers):
         raise ValueError("All elements must be integers")
-    
+
     # Handle special cases
     n = len(numbers)
     if n == 0:
         return []
     if n == 1:
         return [1]
-    
+
     # Initialize result array
     result = [1] * n
-    
+
     # Calculate products of all elements to the left
     left_product = 1
     for i in range(n):
         result[i] = left_product
         left_product *= numbers[i]
-    
-    # Calculate products of all elements to the right and combine with left products
+
+    # Calculate products of all elements to the right and combine
     right_product = 1
     for i in range(n - 1, -1, -1):
         result[i] *= right_product
         right_product *= numbers[i]
-    
+
     return result
 
 
